@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 
 BASE_DIR = os.path.dirname(__file__)
 df = pd.read_csv(os.path.join(BASE_DIR,"data.csv"))
-features = ["AI_Dependency_Index","Prior_GPA","Study_Hours_Per_Week","Motivation_Score","Environment_Score"]
+features = ["AI_Dependency_Index","Prior_GWA","Study_Hours_Per_Week","Motivation_Score","Environment_Score"]
 X = df[features].fillna(0).values
 y = df["High_Risk_Flag"].values
 scaler = StandardScaler()
