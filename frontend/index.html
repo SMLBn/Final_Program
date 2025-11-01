@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IntelliGrade - LSPU</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<script>
+const activeUser = localStorage.getItem('activeUser');
+if(!activeUser){
+  window.location.href='login.html';
+}
+</script>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="IntelliGrade.png" alt="LSPU logo" class="logo"/>
+      <div>
+        <h1>IntelliGrade</h1>
+        <p class="subtitle">Laguna State Polytechnic University - San Pablo City Campus</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn active">Dashboard</button>
+      <button class="nav-btn">Reports</button>
+      <button class="nav-btn">Settings</button>
+      <button class="nav-btn" onclick="logout()">Logout</button>
+<script>
+function logout(){
+  localStorage.removeItem('activeUser');
+  window.location.href='login.html';
+}
+</script>
+
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="controls">
+      <label for="studentSelect">Select Student:</label>
+      <select id="studentSelect"></select>
+      <button id="loadBtn">Load</button>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <h3>AI Dependency Index</h3>
+        <p id="aiIndex" class="big">—</p>
+      </div>
+      <div class="card">
+        <h3>Predicted Risk</h3>
+        <p id="riskStatus" class="big">—</p>
+      </div>
+      <div class="card">
+        <h3>Average Grade</h3>
+        <p id="avgGrade" class="big">—</p>
+      </div>
+      <div class="card">
+        <h3>Total Respondents</h3>
+        <p id="totalResp" class="big">—</p>
+      </div>
+    </section>
+
+    <section class="charts">
+      <div class="chart-card">
+        <h4>Dependency Domains</h4>
+        <canvas id="barChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h4>Important Trend</h4>
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="recommendations card">
+        <h4>Recommendations</h4>
+        <div id="recoText">Select a student to view recommendations based on CLT, SDT, and SCT.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">IntelliGrade • All Rights Reserved. • DevCo-BLV (2025)</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
