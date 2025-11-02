@@ -23,6 +23,10 @@ model_bundle = None
 if os.path.exists(MODEL_PATH):
     model_bundle = joblib.load(MODEL_PATH)
 
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to IntelliGrade API", "status": "running"}
+
 @app.get("/students")
 def get_students():
     return df.to_dict(orient="records")
@@ -52,7 +56,7 @@ def predict(student_id: str):
     if model_bundle is not None:
         scaler = model_bundle["scaler"]
         model = model_bundle["model"]
-        features = ["AI_Dependency_Index","Prior_GPA","Study_Hours_Per_Week","Motivation_Score","Environment_Score"]
+        features = ["AI_Dependency_Index","Prior_GWA","Study_Hours_Per_Week","Motivation_Score","Environment_Score"]
         X = np.array([row[f] for f in features]).reshape(1,-1)
         Xs = scaler.transform(X)
         prob = float(model.predict_proba(Xs)[0][1])
@@ -73,7 +77,7 @@ def train_model(req: TrainRequest):
     from sklearn.preprocessing import StandardScaler
     import joblib, numpy as np
     data = df.copy()
-    features = ["AI_Dependency_Index","Prior_GPA","Study_Hours_Per_Week","Motivation_Score","Environment_Score"]
+    features = ["AI_Dependency_Index","Prior_GWA","Study_Hours_Per_Week","Motivation_Score","Environment_Score"]
     X = data[features].fillna(0).values
     y = data["High_Risk_Flag"].values
     scaler = StandardScaler()
