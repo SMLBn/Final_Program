@@ -7,16 +7,21 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body class="auth">
+  <div class="particles"></div>
   <div class="auth-box">
     <img src="Logo-LSPU.png" class="logo" alt="LSPU logo">
     <h2>IntelliGrade</h2>
-    <input id="loginEmail" placeholder="Email" type="email" />
-    <input id="loginPassword" placeholder="Password" type="password" />
-    <button onclick="login()">Login</button>
-    <p>Don’t have an account? <a href="signup.html">Sign up</a></p>
+    <p class="subtitle">Laguna State Polytechnic University</p>
+    <form onsubmit="return login(event)">
+      <input id="loginEmail" placeholder="Email" type="email" required />
+      <input id="loginPassword" placeholder="Password" type="password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p class="auth-link">Don't have an account? <a href="signup.html">Sign up</a></p>
   </div>
 <script>
-function login(){
+function login(event){
+  event.preventDefault();
   const email=document.getElementById('loginEmail').value;
   const pass=document.getElementById('loginPassword').value;
   const users=JSON.parse(localStorage.getItem('users')||'[]');
